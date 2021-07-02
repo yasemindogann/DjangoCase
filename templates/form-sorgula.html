@@ -1,0 +1,65 @@
+{% extends 'partials/_base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+
+<div class="container mt-5">
+    <div class="row yuksek">
+    <div class="col-md-7 mx-auto my-auto renk rounded-2 shadow">
+
+        <h2 class="display-6 text-center pt-3">{% trans "Form Sorgula" %} </h2>
+        <form action="{% url 'form_sorgula' %}" class="needs-validation" method="post" >
+            {% csrf_token %}
+            <fieldset class="p-4">
+               <div class="row mb-3">
+                   <label class="col-md-3 col-form-label">Kod:</label>
+                   <div class="col-md-9">
+                       <input type="text" placeholder="Başlık Giriniz" class="form-control" name="code" required>
+                   </div>
+               </div>
+            <div class="d-grid mx-auto col-2">
+                <button type="submit" class="btn btn-success mt-3">Gönder</button>
+            </div>
+            </fieldset>
+
+        </form>
+    </div>
+    </div>
+</div>
+
+<br><br><br>
+{% if form %}
+
+
+
+
+
+
+<div class="container">
+    <div class="row yuk">
+    <div class="col-md-7 mx-auto my-auto renk rounded-2 shadow">
+        <h2 class="display-6 text-center pt-3">{% trans "Form Alanı" %}</h2>
+    <div class="media">
+        <ul class="list-group">
+              <li class="list-group-item disabled">
+              <div class="media-left media-top">
+                  <img src="{{form.img.url}}" class="media-object" style="width:100px">
+              </div>
+              </li>
+              <li class="list-group-item"><b>Başlık:</b> {{form.baslik}}</li>
+              <li class="list-group-item"><b>Email:</b> {{form.email}}</li>
+              <li class="list-group-item"><a href="#"><b>Link:</b> {{form.link}}</a></li>
+              <li class="list-group-item"><b>Açıklama:</b> {{form.aciklama}}</li>
+        </ul>
+    </div>
+    </div>
+    </div>
+</div>
+
+{% endif %}
+
+<br><br>
+
+
+{% endblock %}

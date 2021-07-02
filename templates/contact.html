@@ -1,0 +1,88 @@
+{% extends 'partials/_base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+
+<div class="container">
+    <div class="row yuk">
+    <div class="col-md-7 mx-auto my-auto renk rounded-2 shadow">
+        <h2 class="display-6 text-center pt-3">{% trans "Form Alanı" %}</h2>
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <form action="" class="needs-validation" method="POST" novalidate enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="p-4">
+               <div class="row mb-3">
+                   <label  class="col-md-3 col-form-label">Başlık:</label>
+                   <div class="col-md-9">
+                        {{form.baslik}}
+                       <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                   </div>
+               </div>
+               <div class="row mb-3">
+                <label  class="col-md-3 col-form-label">Email Adresi:</label>
+                <div class="col-md-9">
+                    {{form.email}}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label  class="col-md-3 col-form-label">Link:</label>
+                <div class="col-md-9">
+                     {{form.link}}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label  class="col-form-label col-md-3">Açıklama:</label>
+                <div class="col-md-9">
+                     {{form.aciklama}}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label  class="col-md-3 col-form-label">Resim:</label>
+                <div class="col-md-9">
+                      {{form.img}}
+                </div>
+            </div>
+            <div class="d-grid mx-auto col-2">
+                <button type="submit" class="btn btn-success">Gönder</button>
+            </div>
+            </fieldset>
+        </form>
+    </div>
+    </div>
+</div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>
+
+{% endblock %}

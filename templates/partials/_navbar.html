@@ -1,0 +1,41 @@
+{% load static %}
+{% load i18n %}
+<div class="nav">
+
+<ul>
+  <li><a class="{% if '/' == request.path %} active {% endif %}" href="{% url 'index' %}">{% trans "Anasayfa" %}</a></li>
+  <li><a class="{% if 'contact' in request.path %} active {% endif %}" href="{% url 'contact' %}">{% trans "Form Sayfası" %}</a></li>
+  <li><a class="{% if 'form_sorgula' in request.path %} active {% endif %}" href="{% url 'form_sorgula' %}">{% trans "Form Sorgula" %}</a></li>
+</ul>
+
+<div class="pull-right">
+    <ul class="header-top-links">
+        <li class="dropdown default-dropdown">
+            <form action="" method="POST" class="mt-3">{% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}">
+                <select name="language">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <option value="{{ languages.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                            {{ language.name_local }} ({{ language.code }})
+                      </option>
+                {% endfor %}
+                </select>
+                <input type="submit" value="Git">
+            </form>
+        </li>
+    </ul>
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
